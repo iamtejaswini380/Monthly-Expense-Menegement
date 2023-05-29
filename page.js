@@ -116,7 +116,7 @@ function saveToStorage() {
   const savedData = localDataUtils.get("data");
   const expenses = getAllExpenseData();
   savedData[MONTH.id] = expenses;
-  localDataUtils.set(data, savedData)
+  localDataUtils.set("data", savedData)
 }
 function renderExpenseView() {
   const data = localDataUtils.get("data");
