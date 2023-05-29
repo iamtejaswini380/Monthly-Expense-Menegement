@@ -1,11 +1,11 @@
 window.onload = function () {
   urlParams();
   renderExpenseView();
-  getheader();
+
 }
 let ROW_ID = 1;
 let ITEM_ID = 1;
-
+let MONTH = null;
 //make a function addNewDay and it will contain the whole box of new day with it's elements.when user click on add a new day btn this function will be called.
 function addNewDay(date) {
   const container = document.querySelector("#container");
@@ -113,14 +113,19 @@ function getAllExpenseData() {
   return expenses;
 }
 function saveToStorage() {
+  const savedData = localDataUtils.get("data");
   const expenses = getAllExpenseData();
-  localStorage.setItem("data", JSON.stringify(expenses));
+  savedData[MONTH.id] = expenses;
+  localDataUtils.set(data, savedData)
 }
 function renderExpenseView() {
-  const data = JSON.parse(localStorage.getItem("data"))
-
-  for (let i = 0; i < data.length; i++) {
-    const item = data[i];
+  const data = localDataUtils.get("data");
+  if (!(data && data[MONTH.id])) {
+    return;
+  }
+  const monthData = data[MONTH.id];
+  for (let i = 0; i < monthData.length; i++) {
+    const item = monthData[i];
     const listId = addNewDay(item.date);
     for (let j = 0; j < item.expenses.length; j++) {
       let element = item.expenses[i];
@@ -131,18 +136,18 @@ function renderExpenseView() {
   }
   totalExpense();
 }
+
 function urlParams() {
   const params = new URLSearchParams(window.location.search);
   let name = params.get("name");
   let id = params.get("id");
-}
-
-function getheader() {
+  MONTH = { name, id }
   let headerBox = document.querySelector(".header-box");
   let header = document.createElement("h1");
   header.className = "text-white text-xl pt-2 heading";
-  header.innerHTML = `Expense Of`;
+  header.innerHTML = `Expense Of ${name}`;
   let spanEle = document.createElement("span");
   spanEle.className = "border-2 w-40 mt-1 mb-2";
   headerBox.append(header, spanEle);
 }
+

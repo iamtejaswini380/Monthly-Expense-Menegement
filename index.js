@@ -46,7 +46,9 @@ const MENU = [{
   name: "DEC",
   id: 11
 }]
-
+window.onload = function () {
+  initialStorageSetup();
+}
 let container = document.querySelector(".container")
 for (let i = 0; i < MENU.length; i++) {
   let { name, id } = MENU[i];
@@ -60,10 +62,20 @@ for (let i = 0; i < MENU.length; i++) {
   });
 }
 function navigateToMonth(name, id) {
-  console.log(name, id);
   //Navigate to details page by passing name and id as 
   // query paramter to the URL
   window.location.href = `./page.html?name=${name}&id=${id}`;
+}
+function initialStorageSetup() {
+  let myObject = {};
+  for (let i = 0; i <= 11; i++) {
+    myObject[i] = null;
+  }
+
+  if (localDataUtils.isEmptyByKey("data")) {
+    localDataUtils.set("data", myObject)
+  }
+
 }
 
 
