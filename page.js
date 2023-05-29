@@ -1,6 +1,7 @@
 window.onload = function () {
   urlParams();
   renderExpenseView();
+  getheader();
 }
 let ROW_ID = 1;
 let ITEM_ID = 1;
@@ -118,7 +119,6 @@ function saveToStorage() {
 function renderExpenseView() {
   const data = JSON.parse(localStorage.getItem("data"))
 
-
   for (let i = 0; i < data.length; i++) {
     const item = data[i];
     const listId = addNewDay(item.date);
@@ -137,3 +137,12 @@ function urlParams() {
   let id = params.get("id");
 }
 
+function getheader() {
+  let headerBox = document.querySelector(".header-box");
+  let header = document.createElement("h1");
+  header.className = "text-white text-xl pt-2 heading";
+  header.innerHTML = `Expense Of`;
+  let spanEle = document.createElement("span");
+  spanEle.className = "border-2 w-40 mt-1 mb-2";
+  headerBox.append(header, spanEle);
+}
