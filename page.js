@@ -33,7 +33,8 @@ function removeADay() {
   const container = document.querySelector("#container");
   let elementToRemove = container.lastChild;
   elementToRemove.remove();
-  saveToStorage()
+  saveToStorage();
+  totalExpense();
 }
 //make a function addItems-it will have the item and cost box in it.when user clicks on + sign this function will be called a new row will be added for item and cost.
 function addItem(listId, itemData) {
@@ -65,6 +66,7 @@ function totalExpense() {
   let totalCost = document.querySelector("#total-cost");
   totalCost.value = sum;
 }
+
 /*
 let obj = {
   4: [{
@@ -116,7 +118,8 @@ function saveToStorage() {
   const savedData = localDataUtils.get("data");
   const expenses = getAllExpenseData();
   savedData[MONTH.id] = expenses;
-  localDataUtils.set("data", savedData)
+  localDataUtils.set("data", savedData);
+  showMessage();
 }
 function renderExpenseView() {
   const data = localDataUtils.get("data");
@@ -150,4 +153,16 @@ function urlParams() {
   spanEle.className = "border-2 w-40 mt-1 mb-2";
   headerBox.append(header, spanEle);
 }
+function showMessage() {
+  let msgDiv = document.createElement("div");
 
+  msgDiv.innerHTML = "Saved Successfully"
+  msgDiv.className = "bg-blue-300 h-12 w-32 absolute top-4 left-auto right-0  rounded-md text-yellow-50 text-center text-md"
+  let msg = document.querySelector(".header-box").append(msgDiv)
+  setTimeout(() => {
+    document.msg.removeChild(msgDiv)
+  }, 1000);
+}
+function navigateToMainPage() {
+  window.location.href = "/";
+}

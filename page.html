@@ -7,11 +7,15 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <title>Monthly Expense</title>
   </head>
-  <body class=" ">
+  <body>
     <main class="flex justify-center">
       <div class="bg-indigo-950 flex flex-col h-[80vh] justify-between w-[700px]">
-        <div class="flex flex-col items-center bg-cyan-600 header-box"></div>
+        <div class="flex flex-col items-center bg-cyan-600 header-box relative">
+          <button class="rounded-lg absolute right-auto top-0 left-0 " onclick="navigateToMainPage()"><img src="back-arrow.png" alt="back arrow"></button>
+        </div>
+
         <div class="flex justify-evenly border-b-2 pb-4 mt-5 mb-6">
+
           <button class="bg-gray-100   text-slate-900 p-2 rounded-lg" onclick="addNewDay()">ADD A NEW DAY</button>
           <button class=" bg-gray-100   text-slate-900 p-2 rounded-lg" onclick="removeADay()">REMOVE A DAY</button>
           <button class=" bg-gray-100   text-slate-900 p-2 rounded-lg" onclick="saveToStorage()">SAVE</button>
