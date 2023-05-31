@@ -155,12 +155,12 @@ function urlParams() {
 }
 function showMessage() {
   let msgDiv = document.createElement("div");
-
   msgDiv.innerHTML = "Saved Successfully"
   msgDiv.className = "bg-blue-300 h-12 w-32 absolute top-4 left-auto right-0  rounded-md text-yellow-50 text-center text-md"
-  let msg = document.querySelector(".header-box").append(msgDiv)
+  const msg = document.querySelector(".header-box");
+  msg.append(msgDiv);
   setTimeout(() => {
-    document.msg.removeChild(msgDiv)
+    msgDiv.remove()
   }, 1000);
 }
 function navigateToMainPage() {
